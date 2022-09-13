@@ -14,37 +14,37 @@ Pour cela :
 L'API Groupomania est une API REST.
 Une fois lancée, cette API met plusieurs routes à votre disposition :
 
-- La route pour créer un utilisateur
-`POST /api/auth/signup`
-Prend en parametre `{ email: String , password: String } `
+- La route pour créer un utilisateur  
+`POST /api/auth/signup`  
+Prend en parametre `{ email: String , password: String } `  
 Retourne `{ message: String }`
 
-- La route pour connecter un utilisateur
-`POST /api/auth/login`
-Prend en parametre `{ email: String , password: String } `
+- La route pour connecter un utilisateur  
+`POST /api/auth/login`  
+Prend en parametre `{ email: String , password: String } `  
 Retourne `{ userId: String , token: String }`
 
-- La route pour récuperer tous les posts
-`GET /api/posts`
+- La route pour récuperer tous les posts  
+`GET /api/posts`  
 
-- La route pour recupérer le detail d'un post
-`GET /api/posts/{id}`
+- La route pour recupérer le detail d'un post  
+`GET /api/posts/{id}`  
 
-- La route pour créer un post
-`POST /api/posts`
-Prend en parametre `{ post: String , image: File } `
+- La route pour créer un post  
+`POST /api/posts`  
+Prend en parametre `{ post: String , image: File } `  
 Retourne `{ message: String }`
 
-- La route pour mettre à jour un post
-`PUT /api/post/{id}`
-Prend en parametre soit `post au format JSON` soit `{ post: String , image: File }`
+- La route pour mettre à jour un post  
+`PUT /api/post/{id}`  
+Prend en parametre soit `post au format JSON` soit `{ post: String , image: File }`  
 Retourne `{ message: String}`
 
-- La route pour supprimer un post
-`DELETE /api/post/{id}`
+- La route pour supprimer un post  
+`DELETE /api/post/{id}`  
 Retourne `{ message: String}`
 
-- La route pour Liker un post
-`POST /api/posts/{id}/like`
-Prend en parametre `{ userId: String , like: Number } `
-Retourne `{ message: String}`
+- La route pour Liker un post  
+`POST /api/posts/{id}/like`  
+Prend en parametre `{ userId: String , like: Number } `  
+Retourne `{ message: String}`  
