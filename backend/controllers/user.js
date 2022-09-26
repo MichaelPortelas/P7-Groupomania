@@ -10,7 +10,7 @@ exports.signup = (req, res, next) => {
           pseudo: req.body.pseudo,  
           email: req.body.email,
           password: hash,
-          admin: false
+          admin: false,
         });
         user.save()
           .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -32,6 +32,7 @@ exports.signup = (req, res, next) => {
                      }
                      res.status(200).json({
                          userId: user._id,
+                         pseudo: user.pseudo,
                          token: jwt.sign(
                              { userId: user._id },
                              'KSkCQocJLzlx1-UkEaOtjKcrH0oP5C1bWadvVAqOeNHr7yL7eTd6GX80DvQ1cFh7FVZQ',

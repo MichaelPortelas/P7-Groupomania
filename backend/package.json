@@ -13,5 +13,8 @@
     "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.19",
     "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "yarn-upgrade-all": "^0.7.1"
   }
 }
