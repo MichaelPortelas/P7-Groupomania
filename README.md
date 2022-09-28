@@ -16,7 +16,7 @@ Une fois lancée, cette API met plusieurs routes à votre disposition :
 
 - La route pour créer un utilisateur  
 `POST /api/auth/signup`  
-Prend en parametre `{ email: String , password: String } `  
+Prend en parametre `{ pseudo: String , email: String , password: String } `  
 Retourne `{ message: String }`
 
 - La route pour connecter un utilisateur  
