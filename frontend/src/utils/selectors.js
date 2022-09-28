@@ -1,1 +1,1 @@
-export const selectUser = (state) => state.user
+export const selectCache = (state) => state.users.userCache

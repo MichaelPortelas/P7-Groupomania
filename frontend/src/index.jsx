@@ -5,7 +5,7 @@ import {StyledGlobalStyle} from './utils/style/StyledGlobalStyle'
 
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query'
-import store from './utils/store'
+import store from './app/store'
 
 import Header from './components/Header'
 import Footer from './components/Footer'
