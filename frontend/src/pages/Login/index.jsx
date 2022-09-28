@@ -1,85 +1,82 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom'
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCache } from "../../features/users.slice";
+import { selectCache } from "../../utils/selectors";
+import { FormBody, LoginInput, LoginContainer, LoginTitleContainer, LoginTitle, LoginSubTitle, FormContainer, LoginFooterLine, LoginButton  } from "./styles"
 
 const Login = () => {
-    
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [user, setUser] = useState();
+    const formRef = useRef();
+    const inputEmail = useRef();
+    const inputPassword = useRef();
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        const loggedInUser = localStorage.getItem("user");
-        
-        if (loggedInUser) {
-          const foundUser = JSON.parse(loggedInUser);
-          setUser(foundUser);
-        }
-    }, []);
+    const cache = useSelector(selectCache);    
 
-    const handleLogout = () => {
-        setEmail("");
-        setPassword("")
-        setUser({});
-        localStorage.clear();
-    };
-          
-    const HandleSubmit = async e => {
+    const HandleSubmit = (e) => {
 
         e.preventDefault();
         
-        const user = { email, password }
-        
-        try {
+        const data = { 
+            email:  inputEmail.current.value,
+            password:  inputPassword.current.value,
+        }
 
-            const response = await axios.post('http://localhost:3000/api/auth/login', user)
-    
-            setUser(response.data)
+        axios.post('http://localhost:3000/api/auth/login', data)
+        .then((res) => {
 
-            console.log(response.data)
+            dispatch(setCache(res.data))
 
-            localStorage.setItem('user', JSON.stringify(response.data))
+            localStorage.setItem('user', JSON.stringify(res.data))
 
-        } catch (error) {
+            formRef.current.reset()
+
+            window.location.href='/';
+        })
+        .catch((error) => {
             console.log(error)
-            return <span>il y as un probleme</span>
-        } 
-        
-
+            return <span>Oupssss!! il y a un problème</span>
+        })
     }
 
-    if (user) {
+    if (cache) {
         return (
             <div>
-                <div>{user.pseudo} is loggged in </div>
-                <button onClick={handleLogout}>logout</button>
+                <div>{cache.pseudo} is loggged in </div>
             </div>
             
         );
         
     }
 
-    // if there's no user, show the login form
     return (
-        <form onSubmit={HandleSubmit}>
-            <label htmlFor="mail">Mail : </label>
-            <input
-            type="text"
-            value={email}
-            placeholder="enter a username"
-            onChange={({ target }) => setEmail(target.value)}
-            />
-            
-            <div>
-                <label htmlFor="password">password: </label>
-                <input
-                    type="password"
-                    value={password}
-                    placeholder="enter a password"
-                    onChange={({ target }) => setPassword(target.value)}
-                />
-            </div>
-            <button type="submit">Se Connecter</button>
-        </form>
+        <LoginContainer>
+            <LoginTitleContainer>
+                <LoginTitle>Connectez-Vous</LoginTitle>
+                <LoginSubTitle>Ou créez votre compte</LoginSubTitle>
+            </LoginTitleContainer>
+            <FormContainer>
+                <FormBody onSubmit={(e) => HandleSubmit(e)} ref={formRef}>
+                    <LoginInput
+                        type="email"
+                        placeholder="Adresse e-mail"
+                        ref={inputEmail}
+                    />                   
+                    
+                    <LoginInput
+                        type="password"
+                        placeholder="Mot de passe"
+                        ref={inputPassword}
+                    />
+                    <LoginButton type="submit">Se Connecter</LoginButton>
+                </FormBody>
+                <LoginFooterLine />
+                <Link to="/signup"><LoginButton>Créer Un Nouveau Compte</LoginButton></Link>
+            </FormContainer>
+        </LoginContainer>
+
+        
     );
 
 }

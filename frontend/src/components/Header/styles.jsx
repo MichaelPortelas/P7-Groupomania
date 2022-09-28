@@ -34,8 +34,9 @@ export const LinkTitle = styled.div `
         border-bottom : 3px solid ${colors.primary}; 
     }
 `
-export const StyledIcon = styled.img `
-    height: 32px;
-    width: 32px;
+export const StyledIcon = styled.svg `
+    height: 22px;
+    width: 26px;
+    scale: 2;
     padding-right: 8px;
 ` 
