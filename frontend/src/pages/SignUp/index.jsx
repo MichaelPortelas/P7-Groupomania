@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCache } from "../../utils/selectors";
 import { setCache } from "../../features/users.slice";
-import { SignupTitleContainer, SignupTitle, SignupSubTitle, SignupButton, FormBody, SignupFooterLine, FormContainer, SignupInput, SignupContainer } from "./styles"
+import { BaseContainer, FormInput, FormTitleContainer, FormTitle, FormSubTitle, FormContainer, FormBody, FormFooterLine, DarkButton } from "../../utils/style/Atoms";
 
 const SignUp = () => {
     const formRef = useRef();
@@ -65,36 +65,35 @@ const SignUp = () => {
     }
      
     return (
-        <SignupContainer>
-            <SignupTitleContainer>
-                <SignupTitle>Inscrivez-Vous</SignupTitle>
-                <SignupSubTitle>C'est rapide et facile.</SignupSubTitle>
-            </SignupTitleContainer>
+        <BaseContainer>
+            <FormTitleContainer>
+                <FormTitle>Inscrivez-Vous</FormTitle>
+                <FormSubTitle>C'est rapide et facile.</FormSubTitle>
+            </FormTitleContainer>
             <FormContainer>
                 <FormBody onSubmit={(e) => HandleSubmit(e)} ref={formRef}>
-                    <SignupInput
+                    <FormInput
                         type="text"
                         placeholder="Pseudo"
                         ref={inputPseudo}
                     />                    
                     
-                    <SignupInput
+                    <FormInput
                         type="email"
                         placeholder="Adresse e-mail"
                         ref={inputEmail}
                     />     
                     
-                    <SignupInput
-                        type="password"
+                    <FormInput                        type="password"
                         placeholder="Mot de passe"
                         ref={inputPassword}
                     />
                     
-                    <SignupFooterLine />
-                    <SignupButton type="submit">S'inscrire</SignupButton>
+                    <FormFooterLine />
+                    <DarkButton type="submit">S'inscrire</DarkButton>
                 </FormBody>
             </FormContainer>
-        </SignupContainer>
+        </BaseContainer>
         
     );
 };

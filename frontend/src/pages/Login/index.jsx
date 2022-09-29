@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCache } from "../../features/users.slice";
 import { selectCache } from "../../utils/selectors";
-import { FormBody, LoginInput, LoginContainer, LoginTitleContainer, LoginTitle, LoginSubTitle, FormContainer, LoginFooterLine, LoginButton  } from "./styles"
+import { BaseContainer, FormInput, FormTitleContainer, FormTitle, FormSubTitle, FormContainer, FormBody, FormFooterLine, DarkButton } from "../../utils/style/Atoms";
 
 const Login = () => {
     const formRef = useRef();
@@ -51,30 +51,30 @@ const Login = () => {
     }
 
     return (
-        <LoginContainer>
-            <LoginTitleContainer>
-                <LoginTitle>Connectez-Vous</LoginTitle>
-                <LoginSubTitle>Ou créez votre compte</LoginSubTitle>
-            </LoginTitleContainer>
+        <BaseContainer>
+            <FormTitleContainer>
+                <FormTitle>Connectez-Vous</FormTitle>
+                <FormSubTitle>Ou créez votre compte</FormSubTitle>
+            </FormTitleContainer>
             <FormContainer>
                 <FormBody onSubmit={(e) => HandleSubmit(e)} ref={formRef}>
-                    <LoginInput
+                    <FormInput
                         type="email"
                         placeholder="Adresse e-mail"
                         ref={inputEmail}
                     />                   
                     
-                    <LoginInput
+                    <FormInput
                         type="password"
                         placeholder="Mot de passe"
                         ref={inputPassword}
                     />
-                    <LoginButton type="submit">Se Connecter</LoginButton>
+                    <DarkButton type="submit">Se Connecter</DarkButton>
                 </FormBody>
-                <LoginFooterLine />
-                <Link to="/signup"><LoginButton>Créer Un Nouveau Compte</LoginButton></Link>
+                <FormFooterLine />
+                <Link to="/signup"><DarkButton>Créer Un Nouveau Compte</DarkButton></Link>
             </FormContainer>
-        </LoginContainer>
+        </BaseContainer>
 
         
     );
