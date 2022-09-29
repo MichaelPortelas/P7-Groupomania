@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCache } from "../../utils/selectors";
 import { setCache } from "../../features/users.slice";
-import { BaseContainer, FormInput, FormTitleContainer, FormTitle, FormSubTitle, FormContainer, FormBody, FormFooterLine, DarkButton } from "../../utils/style/Atoms";
+import * as AtomsStyles from "../../utils/style/Atoms";
 
 const SignUp = () => {
     const formRef = useRef();
@@ -65,35 +65,35 @@ const SignUp = () => {
     }
      
     return (
-        <BaseContainer>
-            <FormTitleContainer>
-                <FormTitle>Inscrivez-Vous</FormTitle>
-                <FormSubTitle>C'est rapide et facile.</FormSubTitle>
-            </FormTitleContainer>
-            <FormContainer>
-                <FormBody onSubmit={(e) => HandleSubmit(e)} ref={formRef}>
-                    <FormInput
+        <AtomsStyles.BaseContainer>
+            <AtomsStyles.FormTitleContainer>
+                <AtomsStyles.FormTitle>Inscrivez-Vous</AtomsStyles.FormTitle>
+                <AtomsStyles.FormSubTitle>C'est rapide et facile.</AtomsStyles.FormSubTitle>
+            </AtomsStyles.FormTitleContainer>
+            <AtomsStyles.FormContainer>
+                <AtomsStyles.FormBody onSubmit={(e) => HandleSubmit(e)} ref={formRef}>
+                    <AtomsStyles.FormInput
                         type="text"
                         placeholder="Pseudo"
                         ref={inputPseudo}
                     />                    
                     
-                    <FormInput
+                    <AtomsStyles.FormInput
                         type="email"
                         placeholder="Adresse e-mail"
                         ref={inputEmail}
                     />     
                     
-                    <FormInput                        type="password"
+                    <AtomsStyles.FormInput                        type="password"
                         placeholder="Mot de passe"
                         ref={inputPassword}
                     />
                     
-                    <FormFooterLine />
-                    <DarkButton type="submit">S'inscrire</DarkButton>
-                </FormBody>
-            </FormContainer>
-        </BaseContainer>
+                    <AtomsStyles.FormFooterLine />
+                    <AtomsStyles.DarkButton type="submit">S'inscrire</AtomsStyles.DarkButton>
+                </AtomsStyles.FormBody>
+            </AtomsStyles.FormContainer>
+        </AtomsStyles.BaseContainer>
         
     );
 };

@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCache } from "../../features/users.slice";
 import { selectCache } from "../../utils/selectors";
-import { BaseContainer, FormInput, FormTitleContainer, FormTitle, FormSubTitle, FormContainer, FormBody, FormFooterLine, DarkButton } from "../../utils/style/Atoms";
+import * as AtomsStyles from "../../utils/style/Atoms";
 
 const Login = () => {
     const formRef = useRef();
@@ -51,30 +51,30 @@ const Login = () => {
     }
 
     return (
-        <BaseContainer>
-            <FormTitleContainer>
-                <FormTitle>Connectez-Vous</FormTitle>
-                <FormSubTitle>Ou créez votre compte</FormSubTitle>
-            </FormTitleContainer>
-            <FormContainer>
-                <FormBody onSubmit={(e) => HandleSubmit(e)} ref={formRef}>
-                    <FormInput
+        <AtomsStyles.BaseContainer>
+            <AtomsStyles.FormTitleContainer>
+                <AtomsStyles.FormTitle>Connectez-Vous</AtomsStyles.FormTitle>
+                <AtomsStyles.FormSubTitle>Ou créez votre compte</AtomsStyles.FormSubTitle>
+            </AtomsStyles.FormTitleContainer>
+            <AtomsStyles.FormContainer>
+                <AtomsStyles.FormBody onSubmit={(e) => HandleSubmit(e)} ref={formRef}>
+                    <AtomsStyles.FormInput
                         type="email"
                         placeholder="Adresse e-mail"
                         ref={inputEmail}
                     />                   
                     
-                    <FormInput
+                    <AtomsStyles.FormInput
                         type="password"
                         placeholder="Mot de passe"
                         ref={inputPassword}
                     />
-                    <DarkButton type="submit">Se Connecter</DarkButton>
-                </FormBody>
-                <FormFooterLine />
-                <Link to="/signup"><DarkButton>Créer Un Nouveau Compte</DarkButton></Link>
-            </FormContainer>
-        </BaseContainer>
+                    <AtomsStyles.DarkButton type="submit">Se Connecter</AtomsStyles.DarkButton>
+                </AtomsStyles.FormBody>
+                <AtomsStyles.FormFooterLine />
+                <Link to="/signup"><AtomsStyles.DarkButton>Créer Un Nouveau Compte</AtomsStyles.DarkButton></Link>
+            </AtomsStyles.FormContainer>
+        </AtomsStyles.BaseContainer>
 
         
     );
