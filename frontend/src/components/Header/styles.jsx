@@ -12,7 +12,7 @@ export const HeaderContainer = styled.header `
 export const NavContainer = styled.nav `
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
 `
 
 export const Logo = styled.img `
