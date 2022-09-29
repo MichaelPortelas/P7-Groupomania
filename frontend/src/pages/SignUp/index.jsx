@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCache } from "../../utils/selectors";
 import { setCache } from "../../features/users.slice";
+import { SignupTitleContainer, SignupTitle, SignupSubTitle, SignupButton, FormBody, SignupFooterLine, FormContainer, SignupInput, SignupContainer } from "./styles"
 
 const SignUp = () => {
     const formRef = useRef();
@@ -64,30 +65,37 @@ const SignUp = () => {
     }
      
     return (
-        <form onSubmit={(e) => HandleSubmit(e)} ref={formRef}>
-            <input
-                type="text"
-                placeholder="enter a username"
-                ref={inputPseudo}
-            />
-            
-            <div>
-            <input
-                type="email"
-                placeholder="enter a username"
-                ref={inputEmail}
-            />
-            </div>
-            
-            <div>
-            <input
-                type="password"
-                placeholder="enter a password"
-                ref={inputPassword}
-            />
-            </div>
-            <button type="submit">Register</button>
-        </form>
+        <SignupContainer>
+            <SignupTitleContainer>
+                <SignupTitle>Inscrivez-Vous</SignupTitle>
+                <SignupSubTitle>C'est rapide et facile.</SignupSubTitle>
+            </SignupTitleContainer>
+            <FormContainer>
+                <FormBody onSubmit={(e) => HandleSubmit(e)} ref={formRef}>
+                    <SignupInput
+                        type="text"
+                        placeholder="Pseudo"
+                        ref={inputPseudo}
+                    />                    
+                    
+                    <SignupInput
+                        type="email"
+                        placeholder="Adresse e-mail"
+                        ref={inputEmail}
+                    />     
+                    
+                    <SignupInput
+                        type="password"
+                        placeholder="Mot de passe"
+                        ref={inputPassword}
+                    />
+                    
+                    <SignupFooterLine />
+                    <SignupButton type="submit">S'inscrire</SignupButton>
+                </FormBody>
+            </FormContainer>
+        </SignupContainer>
+        
     );
 };
 
