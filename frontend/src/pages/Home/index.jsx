@@ -1,21 +1,20 @@
 import { useSelector } from "react-redux"
 import { selectCache } from "../../utils/selectors"
+import * as AtomsStyles from "../../utils/style/Atoms";
 
 function Home(){
     const cache = useSelector(selectCache)
 
-    if (cache) {
-        return (
-            <div>
-                <div>Bienvenue {cache.pseudo}</div>
-            </div>
-            
-        );
-        
-    }
-
     return (
-        <div>Hello world</div>
+        
+        <AtomsStyles.BaseContainer>
+            {cache ? (
+                <div>Bienvenue {cache.pseudo}</div>
+            ) : (
+                <div>Hello world</div>
+            )}
+        </AtomsStyles.BaseContainer>
+        
     )
 }
 
