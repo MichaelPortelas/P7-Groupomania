@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import {StyledGlobalStyle} from './utils/style/StyledGlobalStyle'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import store from './app/store'
