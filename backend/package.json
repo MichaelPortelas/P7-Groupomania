@@ -14,6 +14,10 @@
     "nodemon": "^2.0.19",
     "pug": "^3.0.2"
   },
+  "scripts": {
+    "start": "node ./server.js",
+    "devstart": "nodemon ./server.js"
+  },
   "devDependencies": {
     "yarn-upgrade-all": "^0.7.1"
   }
