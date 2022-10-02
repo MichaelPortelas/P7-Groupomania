@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom'
 import colors from './colors'
 import styled, { keyframes } from 'styled-components'
+
+import Nav from 'react-bootstrap/Nav';
 
 const rotate = keyframes`
   from {
@@ -21,7 +22,7 @@ export const Loader = styled.div`
   height: 0;
   width: 0;
 `
-export const StyledLink = styled(Link) `
+export const StyledLink = styled(Nav.Link) `
   display: flex;
   align-items: center;
   text-decoration: none;
