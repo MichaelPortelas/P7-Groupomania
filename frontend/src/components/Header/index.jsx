@@ -37,8 +37,8 @@ function Header() {
     
 
     return (
-        <header className='mb-5'>
-            <Navbar collapseOnSelect expand="lg" fixed="top" className='bg-white navbar-light'>
+        <header>
+            <Navbar collapseOnSelect expand="lg" sticky="top" className='bg-white navbar-light'>
                 <HeaderContainer fluid>
                     <Navbar.Brand href="/"><Logo src={RedLogo} className="py-3" alt="Groupomania"/></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />

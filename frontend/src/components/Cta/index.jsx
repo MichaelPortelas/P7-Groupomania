@@ -8,7 +8,7 @@ function Cta() {
     const cache = useSelector(selectCache)
 
     return (
-        <ColCta xs={6} className="border border-2 rounded-4">                    
+        <ColCta xs={10} md={8} lg={6} className="border border-2 rounded-4">                    
             <RowCta className="p-4 justify-content-center rounded-4">
                 <ColCtaText className="py-2 rounded-4">
                     {cache ? (

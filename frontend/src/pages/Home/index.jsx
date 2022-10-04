@@ -7,9 +7,9 @@ import Cta from '../../components/Cta';
 function Home(){   
 
     return (
-        <main className="mt-5">
-            <Container fluid className="mt-5 pt-5">
-                <Row className="justify-content-center mt-5">
+        <main className='mt-3'>
+            <Container fluid>
+                <Row className="justify-content-center">
                     <Cta />
                 </Row>
                 <Row className="mt-3 mb-4 justify-content-center">
