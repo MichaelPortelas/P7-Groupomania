@@ -1,5 +1,5 @@
 
-import { HeaderContainer, LinkTitle, StyledIcon } from './styles'
+import { Logo, HeaderContainer, LinkTitle, StyledIcon } from './styles'
 import { StyledLink } from '../../utils/style/Atoms'
 import RedLogo from '../../assets/icon-left-font.png'
 import { useDispatch, useSelector} from "react-redux";
@@ -35,24 +35,24 @@ function Header() {
     
 
     return (
-        <header>
-            <Navbar collapseOnSelect expand="lg">
+        <header className='mb-5'>
+            <Navbar collapseOnSelect expand="lg" fixed="top" className='bg-white navbar-light'>
                 <HeaderContainer fluid>
-                    <Navbar.Brand href="/"><img src={RedLogo} className="img-fluid py-3" alt="Groupomania"/></Navbar.Brand>
+                    <Navbar.Brand href="/"><Logo src={RedLogo} className="py-3" alt="Groupomania"/></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="me-auto">
-                            <StyledLink href="/">
+                        <Nav className='w-100 justify-content-evenly'>
+                            <StyledLink href="/" className="d-flex align-items-baseline">
                                 <StyledIcon><FaHome/></StyledIcon>
                                 <LinkTitle>Accueil</LinkTitle>
                             </StyledLink>
                             {cache ? (
-                                <StyledLink href="#" onClick={() => handleLogout()} className="">
+                                <StyledLink href="#" onClick={() => handleLogout()} className="d-flex align-items-baseline">
                                     <StyledIcon><FaSignOutAlt/></StyledIcon>
                                     <LinkTitle>Déconnexion</LinkTitle>
                                 </StyledLink>
                             ):(
-                                <StyledLink href="/login">
+                                <StyledLink href="/login" className="d-flex align-items-baseline">
                                     <StyledIcon><FaSignInAlt/></StyledIcon>
                                     <LinkTitle>Connexion</LinkTitle>
                                 </StyledLink>

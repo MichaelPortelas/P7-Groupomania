@@ -26,3 +26,7 @@ export const StyledIcon = styled.svg `
     scale: 2;
     padding-right: 8px;
 ` 
+
+export const Logo = styled.img `
+    width: 60%;
+`
