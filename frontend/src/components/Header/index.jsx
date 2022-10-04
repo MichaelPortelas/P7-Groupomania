@@ -1,17 +1,19 @@
 
-import { NavLink, HeaderContainer} from './styles'
-import { StyledLink, Logo } from '../../utils/style/Atoms'
+import { HeaderContainer} from './styles'
+import { NavLink, StyledLink, Logo } from '../../utils/style/Atoms'
 import RedLogo from '../../assets/icon-left-font.png'
 import { useDispatch, useSelector} from "react-redux";
 import { setCache, deleteCache } from "../../features/users.slice";
 import { useEffect } from "react";
 import { selectCache } from '../../utils/selectors'
-import { FaHome, FaSignOutAlt, FaSignInAlt } from "react-icons/fa"
+import { FaHome, FaSignOutAlt } from "react-icons/fa"
 
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
+
+import Login from '../Login';
 
 function Header() {
 
@@ -56,9 +58,7 @@ function Header() {
                                             <NavLink className='d-flex fs-3 align-items-center'><FaSignOutAlt/>&nbsp;Déconnexion</NavLink>
                                         </StyledLink>
                                     ):(
-                                        <StyledLink href="/login" className="d-flex align-items-baseline">
-                                            <NavLink className=' d-flex fs-3 align-items-center'><FaSignInAlt/>&nbsp;Connexion</NavLink>
-                                        </StyledLink>
+                                        <Login />
                                     )}
                                 </Col>
                             </Row>

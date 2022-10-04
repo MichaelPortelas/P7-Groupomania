@@ -26,6 +26,14 @@ export const StyledLink = styled(Nav.Link) `
   text-decoration: none;
   color: ${colors.black};
 `
+export const NavLink = styled.div `
+    &:hover {
+        border-bottom : 3px solid ${colors.primary};
+        color: ${colors.secondary};
+        font-weight: 400;
+        transition: .3s;
+    }
+`
 
 export const DarkButton = styled.button `
     padding: 16px;
