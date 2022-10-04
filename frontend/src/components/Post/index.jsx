@@ -1,23 +1,24 @@
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image'
-import Button from 'react-bootstrap/Button';
 
+import { ColPostDate, ColPostPseudo, ButtonDelete, ButtonUpdate, ColPost, RowPostHeader, RowPostMessage, RowPostImage } from './styles';
+import { StyledLink } from '../../utils/style/Atoms'
 import { FaRegThumbsUp } from 'react-icons/fa'
 
 function Post() {
     return (
-        <Col xs={6} className="border border-2 rounded-3 pb-2">
+        <ColPost xs={6} className="border border-2 rounded-3 pb-2">
             
             {/* POST HEADER */}
-            <Row className="pt-2 justify-content-between">
-                <Col xs={6}>PSEUDO</Col>
-                <Col xs={6} className="text-end">9 septembre 2022, 00:59</Col>
-            </Row>
+            <RowPostHeader className="rounded-top py-2 justify-content-between">
+                <ColPostPseudo xs={6} className="d-flex align-items-center fs-2">Pseudo</ColPostPseudo>
+                <ColPostDate xs={6} className="d-flex align-items-center fs-5 justify-content-end">9 septembre 2022, 00:59</ColPostDate>
+            </RowPostHeader>
             
             {/* POST MESSAGE */}
-            <Row className="p-3 justify-content-center">
-                <Col className="border border-2 rounded-3">
+            <RowPostMessage className="p-3 justify-content-center">
+                <Col className="py-1 bg-white border border-2 rounded-3">
                     <p>
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
                         Odio porro, dolorem ipsam error sequi ab? Placeat 
@@ -27,29 +28,29 @@ function Post() {
                         repellendus est velit excepturi dolore mollitia vitae.
                     </p>
                 </Col>
-            </Row>
+            </RowPostMessage>
             
             {/* POST IMAGE */}
-            <Row>
+            <RowPostImage className="pb-3 border-bottom border-2">
                 <Col className="d-flex justify-content-center">
                     <Image rounded fluid src="https://picsum.photos/680/480?random=1" alt="placeHolder text"/>
                 </Col>
-            </Row>
+            </RowPostImage>
             
             {/* POST FOOTER */}
-            <Row className="mt-2 justify-content-between">
-                <Col className='d-flex align-items-center'>
-                    <div className='fs-4'><FaRegThumbsUp/> J'aime - 0</div>
+            <Row className="mt-2 justify-content-between bg-white">
+                <Col className='d-flex justify-content-center align-items-center'>
+                    <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> J'aime - 0</StyledLink>
                 </Col>
                 <Col>
-                    <Row className='bg-white'>
-                        <Col className="d-flex justify-content-center"><Button variant="secondary">Modifier</Button></Col>
-                        <Col className="d-flex justify-content-center"><Button variant="danger">Supprimer</Button></Col>
+                    <Row>
+                        <Col className="d-flex justify-content-end"><ButtonUpdate variant="secondary">Modifier</ButtonUpdate></Col>
+                        <Col className="d-flex justify-content-start"><ButtonDelete variant="danger">Supprimer</ButtonDelete></Col>
                     </Row>
                 </Col>
             </Row>   
             
-        </Col>
+        </ColPost>
     )
 }
 
