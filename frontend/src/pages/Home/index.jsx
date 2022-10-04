@@ -1,27 +1,22 @@
-import { useSelector } from "react-redux"
-import { selectCache } from "../../utils/selectors"
-
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
-function Home(){
-    const cache = useSelector(selectCache)
+import Post from "../../components/Post";
+import Cta from '../../components/Cta';
+
+function Home(){   
 
     return (
-        
-        <Container fluid>
-            <Row className="justify-content-center">
-                <Col xs={6}>
-                    {cache ? (
-                        <h1>Bienvenue {cache.pseudo}</h1>
-                    ) : (
-                        <div>Hello world</div>
-                    )}
-                </Col>
-            </Row>
-        </Container>
-        
+        <main className="mt-5">
+            <Container fluid className="mt-5 pt-5">
+                <Row className="justify-content-center mt-5">
+                    <Cta />
+                </Row>
+                <Row className="mt-3 mb-4 justify-content-center">
+                    <Post />
+                </Row>                
+            </Container>
+        </main>
     )
 }
 
