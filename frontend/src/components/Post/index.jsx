@@ -39,13 +39,13 @@ function Post() {
             
             {/* POST FOOTER */}
             <Row className="mt-2 justify-content-between bg-white">
-                <Col className='d-flex justify-content-center align-items-center'>
+                <Col xs={12} lg={6} className='d-flex justify-content-center align-items-center'>
                     <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> J'aime - 0</StyledLink>
                 </Col>
-                <Col>
+                <Col xs={12} lg={6}>
                     <Row>
-                        <Col className="d-flex justify-content-end"><ButtonUpdate variant="secondary">Modifier</ButtonUpdate></Col>
-                        <Col className="d-flex justify-content-start"><ButtonDelete variant="danger">Supprimer</ButtonDelete></Col>
+                        <Col xs={12} sm={6} className="d-flex justify-content-center justify-content-sm-end"><ButtonUpdate variant="secondary">Modifier</ButtonUpdate></Col>
+                        <Col xs={12} sm={6} className="d-flex justify-content-center justify-content-sm-start"><ButtonDelete variant="danger">Supprimer</ButtonDelete></Col>
                     </Row>
                 </Col>
             </Row>   

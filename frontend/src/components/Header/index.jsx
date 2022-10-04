@@ -1,6 +1,6 @@
 
-import { NavLink, Logo, HeaderContainer} from './styles'
-import { StyledLink } from '../../utils/style/Atoms'
+import { NavLink, HeaderContainer} from './styles'
+import { StyledLink, Logo } from '../../utils/style/Atoms'
 import RedLogo from '../../assets/icon-left-font.png'
 import { useDispatch, useSelector} from "react-redux";
 import { setCache, deleteCache } from "../../features/users.slice";

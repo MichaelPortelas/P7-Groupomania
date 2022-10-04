@@ -15,6 +15,3 @@ export const NavLink = styled.div `
         transition: .3s;
     }
 `
-export const Logo = styled.img `
-    width: 60%;
-`

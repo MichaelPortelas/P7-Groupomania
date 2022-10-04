@@ -118,3 +118,7 @@ export const BaseContainer = styled.div `
     margin-top: 38px;
     margin-bottom: 127px;
 `
+
+export const Logo = styled.img `
+    width: 60%;
+`
