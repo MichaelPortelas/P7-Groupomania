@@ -7,12 +7,7 @@ export const HeaderContainer = styled(Container) `
     border-bottom: 2px solid ${colors.tertary};
 `
 
-export const LinkTitle = styled.div `
-    font-style: normal;
-    font-weight: 400;
-    font-size: 2rem;
-    text-align: center;
-    
+export const NavLink = styled.div `
     &:hover {
         border-bottom : 3px solid ${colors.primary};
         color: ${colors.secondary};
@@ -20,13 +15,6 @@ export const LinkTitle = styled.div `
         transition: .3s;
     }
 `
-export const StyledIcon = styled.svg `
-    height: 22px;
-    width: 26px;
-    scale: 2;
-    padding-right: 8px;
-` 
-
 export const Logo = styled.img `
     width: 60%;
 `

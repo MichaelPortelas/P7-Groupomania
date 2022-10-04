@@ -1,5 +1,5 @@
 
-import { Logo, HeaderContainer, LinkTitle, StyledIcon } from './styles'
+import { NavLink, Logo, HeaderContainer} from './styles'
 import { StyledLink } from '../../utils/style/Atoms'
 import RedLogo from '../../assets/icon-left-font.png'
 import { useDispatch, useSelector} from "react-redux";
@@ -9,6 +9,8 @@ import { selectCache } from '../../utils/selectors'
 import { FaHome, FaSignOutAlt, FaSignInAlt } from "react-icons/fa"
 
 import Nav from 'react-bootstrap/Nav';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 
 function Header() {
@@ -42,21 +44,26 @@ function Header() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className='w-100 justify-content-evenly'>
-                            <StyledLink href="/" className="d-flex align-items-baseline">
-                                <StyledIcon><FaHome/></StyledIcon>
-                                <LinkTitle>Accueil</LinkTitle>
-                            </StyledLink>
-                            {cache ? (
-                                <StyledLink href="#" onClick={() => handleLogout()} className="d-flex align-items-baseline">
-                                    <StyledIcon><FaSignOutAlt/></StyledIcon>
-                                    <LinkTitle>Déconnexion</LinkTitle>
-                                </StyledLink>
-                            ):(
-                                <StyledLink href="/login" className="d-flex align-items-baseline">
-                                    <StyledIcon><FaSignInAlt/></StyledIcon>
-                                    <LinkTitle>Connexion</LinkTitle>
-                                </StyledLink>
-                            )}
+                            <Row>
+                                <Col xs={6} className="d-flex align-items-center">
+                                    <StyledLink href="/">
+                                        <NavLink className='d-flex fs-3 align-items-center' ><FaHome/>&nbsp;Accueil</NavLink>
+                                    </StyledLink>
+                                </Col>
+                                <Col xs={6}  className="d-flex align-items-center">
+                                    {cache ? (
+                                        <StyledLink href="#" onClick={() => handleLogout()}>
+                                            <NavLink className='d-flex fs-3 align-items-center'><FaSignOutAlt/>&nbsp;Déconnexion</NavLink>
+                                        </StyledLink>
+                                    ):(
+                                        <StyledLink href="/login" className="d-flex align-items-baseline">
+                                            <NavLink className=' d-flex fs-3 align-items-center'><FaSignInAlt/>&nbsp;Connexion</NavLink>
+                                        </StyledLink>
+                                    )}
+                                </Col>
+                            </Row>
+                            
+                            
                         </Nav>
                     </Navbar.Collapse>
                 </HeaderContainer>
