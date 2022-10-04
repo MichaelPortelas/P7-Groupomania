@@ -23,11 +23,8 @@ export const Loader = styled.div`
   width: 0;
 `
 export const StyledLink = styled(Nav.Link) `
-  display: flex;
-  align-items: center;
   text-decoration: none;
   color: ${colors.black};
-  margin-right: 69px;
 `
 
 export const DarkButton = styled.button `
