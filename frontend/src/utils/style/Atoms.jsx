@@ -123,8 +123,6 @@ export const BaseContainer = styled.div `
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 38px;
-    margin-bottom: 127px;
 `
 
 export const Logo = styled.img `
