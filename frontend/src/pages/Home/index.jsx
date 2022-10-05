@@ -1,20 +1,24 @@
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 
 import Post from "../../components/Post";
 import Cta from '../../components/Cta';
 
 function Home(){   
+    const id = [];
+    
+    for(let i = 0; i < 4; i++){
+        id.push(i);
+    }
+
+    console.log(id);
 
     return (
         <main className='mt-3'>
-            <Container fluid>
-                <Row className="justify-content-center">
+            <Container fluid>                
                     <Cta />
-                </Row>
-                <Row className="mt-3 mb-4 justify-content-center">
-                    <Post />
-                </Row>                
+                    {id.map((id) => (
+                        <Post id={id} />
+                    ))}                
             </Container>
         </main>
     )
