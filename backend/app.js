@@ -5,7 +5,7 @@ const app = express();
 
 const mongoose = require('mongoose');
 
-// const sauceRoutes = require('./routes/sauce');
+const postRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
 const indexRouter = require('./routes/index')
 
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
-// app.use('/api/sauces', sauceRoutes);
+app.use('/api/posts', postRoutes);
 app.use('/api/auth', userRoutes);
 
 // view index
