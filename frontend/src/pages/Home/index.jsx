@@ -17,7 +17,7 @@ function Home(){
             <Container fluid>                
                     <Cta />
                     {id.map((id) => (
-                        <Post id={id} />
+                        <Post key={id} id={id} />
                     ))}                
             </Container>
         </main>
