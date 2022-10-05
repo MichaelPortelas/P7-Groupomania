@@ -2,12 +2,22 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image'
 
+import { useSelector } from "react-redux"
+import { selectCache } from "../../utils/selectors"
+
 import { ColPostDate, ColPostPseudo, ButtonDelete, ButtonUpdate, ColPost, RowPostHeader, RowPostMessage, RowPostImage } from './styles';
 import { StyledLink } from '../../utils/style/Atoms'
 import { FaRegThumbsUp } from 'react-icons/fa'
 
 function Post(props) {
     const id = props.id;
+    
+    const cache = useSelector(selectCache)
+    let admin = false;
+
+    if(cache){
+        admin = cache.admin;
+    }
 
     return (
         <Row className="mt-3 mb-4 justify-content-center">
@@ -38,23 +48,30 @@ function Post(props) {
                     </Col>
                 </RowPostImage>
                 
-                {/* POST FOOTER */}
-                <Row className="mt-2 justify-content-between bg-white">
-                    <Col xs={12} lg={6} className='mb-2 mb-lg-0 d-flex justify-content-center align-items-center'>
-                        <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> J'aime - 0</StyledLink>
-                    </Col>
-                    <Col xs={12} lg={6}>
-                        <Row>
-                            <Col xs={12} sm={6} className="mb-2 mb-sm-0 d-flex justify-content-center justify-content-sm-end">
-                                <ButtonUpdate variant="secondary">Modifier</ButtonUpdate>
+                {/* POST FOOTER */}                
+                    {admin ? (
+                        <Row className="mt-2 justify-content-between bg-white">
+                            <Col xs={12} lg={6} className='mb-2 mb-lg-0 d-flex justify-content-center align-items-center'>
+                                <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> J'aime - 0</StyledLink>
                             </Col>
-                            <Col xs={12} sm={6} className="d-flex justify-content-center justify-content-sm-start">
-                                <ButtonDelete variant="danger">Supprimer</ButtonDelete>
+                            <Col xs={12} lg={6}>
+                                <Row>
+                                    <Col xs={12} sm={6} className="mb-2 mb-sm-0 d-flex justify-content-center justify-content-sm-end">
+                                        <ButtonUpdate variant="secondary">Modifier</ButtonUpdate>
+                                    </Col>
+                                    <Col xs={12} sm={6} className="d-flex justify-content-center justify-content-sm-start">
+                                        <ButtonDelete variant="danger">Supprimer</ButtonDelete>
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                    </Col>
-                </Row>   
-                
+                    ):(
+                        <Row className="mt-2 justify-content-center bg-white">
+                            <Col xs={12} lg={6} className='mb-2 mb-lg-0 d-flex justify-content-center align-items-center'>
+                                <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> J'aime - 0</StyledLink>
+                            </Col>
+                        </Row>   
+                    )}                
             </ColPost>
         </Row>
     )
