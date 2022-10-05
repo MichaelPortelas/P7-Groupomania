@@ -1,11 +1,12 @@
 import axios from "axios";
-import { Link } from 'react-router-dom'
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCache } from "../../features/users.slice";
 import * as AtomsStyles from "../../utils/style/Atoms";
 
+import Container from 'react-bootstrap/Container';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import Form from 'react-bootstrap/Form';
 
 import { FaSignInAlt } from "react-icons/fa"
 
@@ -56,33 +57,43 @@ const Login = () => {
 
             <Offcanvas show={show} onHide={handleClose} placement="end">
                 <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Connexion</Offcanvas.Title>
+                    <Offcanvas.Title>Connexion</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>               
-                    <AtomsStyles.BaseContainer>
-                        <AtomsStyles.FormTitleContainer>
-                            <AtomsStyles.FormTitle>Connectez-Vous</AtomsStyles.FormTitle>
-                            <AtomsStyles.FormSubTitle>Ou créez votre compte</AtomsStyles.FormSubTitle>
-                        </AtomsStyles.FormTitleContainer>
-                        <AtomsStyles.FormContainer>
-                            <AtomsStyles.FormBody onSubmit={(e) => HandleSubmit(e)} ref={formRef}>
-                                <AtomsStyles.FormInput
-                                    type="email"
-                                    placeholder="Adresse e-mail"
-                                    ref={inputEmail}
-                                />                   
+                    <Container fluid>
+                        <AtomsStyles.RowFormTitle>
+                            <AtomsStyles.FormTitle className="fs-2 m-0">Connectez-Vous</AtomsStyles.FormTitle>
+                            <AtomsStyles.FormTitle className="m-0">Ou créez votre compte</AtomsStyles.FormTitle>
+                        </AtomsStyles.RowFormTitle>
+                        <AtomsStyles.RowForm className="px-3">
+                            <Form onSubmit={(e) => HandleSubmit(e)} ref={formRef} className="d-flex flex-column">
+                                <Form.Group className="mb-3" controlId="formEmail">
+                                    <AtomsStyles.FormControlInput
+                                        className="fs-4 text-center"                                        
+                                        type="email"
+                                        placeholder="Adresse e-mail"
+                                        ref={inputEmail}
+                                        required                                        
+                                    />                   
+                                </Form.Group>
                                 
-                                <AtomsStyles.FormInput
-                                    type="password"
-                                    placeholder="Mot de passe"
-                                    ref={inputPassword}
-                                />
-                                <AtomsStyles.DarkButton type="submit">Se Connecter</AtomsStyles.DarkButton>
-                            </AtomsStyles.FormBody>
-                            <AtomsStyles.FormFooterLine />
-                            <Link to="/signup" onClick={handleClose}><AtomsStyles.DarkButton>Créer Un Nouveau Compte</AtomsStyles.DarkButton></Link>
-                        </AtomsStyles.FormContainer>
-                    </AtomsStyles.BaseContainer>
+                                <Form.Group className="mb-3" controlId="formPassword">
+                                    <AtomsStyles.FormControlInput
+                                        className="fs-4 text-center"
+                                        type="password"
+                                        placeholder="Mot de passe"
+                                        ref={inputPassword}
+                                        required
+                                    />
+                                </Form.Group>
+                                <AtomsStyles.DarkButton variant="secondary" type="submit" className="fs-4">Se Connecter</AtomsStyles.DarkButton>
+                            </Form>
+                            <AtomsStyles.FormFooterLine className="my-3"/>
+                            <AtomsStyles.StyledLink href="/signup" onClick={handleClose} className="d-flex justify-content-center">
+                                <AtomsStyles.DarkButton variant="secondary" className="fs-4">Créer Un Nouveau Compte</AtomsStyles.DarkButton>
+                            </AtomsStyles.StyledLink>
+                        </AtomsStyles.RowForm>
+                    </Container>
                 </Offcanvas.Body>
             </Offcanvas>
         </>       

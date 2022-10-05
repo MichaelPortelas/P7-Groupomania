@@ -5,6 +5,11 @@ import { selectCache } from "../../utils/selectors";
 import { setCache } from "../../features/users.slice";
 import * as AtomsStyles from "../../utils/style/Atoms";
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+
 const SignUp = () => {
     const formRef = useRef();
     const inputPseudo = useRef();
@@ -65,36 +70,51 @@ const SignUp = () => {
     }
      
     return (
-        <AtomsStyles.BaseContainer>
-            <AtomsStyles.FormTitleContainer>
-                <AtomsStyles.FormTitle>Inscrivez-Vous</AtomsStyles.FormTitle>
-                <AtomsStyles.FormSubTitle>C'est rapide et facile.</AtomsStyles.FormSubTitle>
-            </AtomsStyles.FormTitleContainer>
-            <AtomsStyles.FormContainer>
-                <AtomsStyles.FormBody onSubmit={(e) => HandleSubmit(e)} ref={formRef}>
-                    <AtomsStyles.FormInput
-                        type="text"
-                        placeholder="Pseudo"
-                        ref={inputPseudo}
-                    />                    
-                    
-                    <AtomsStyles.FormInput
-                        type="email"
-                        placeholder="Adresse e-mail"
-                        ref={inputEmail}
-                    />     
-                    
-                    <AtomsStyles.FormInput                        type="password"
-                        placeholder="Mot de passe"
-                        ref={inputPassword}
-                    />
-                    
-                    <AtomsStyles.FormFooterLine />
-                    <AtomsStyles.DarkButton type="submit">S'inscrire</AtomsStyles.DarkButton>
-                </AtomsStyles.FormBody>
-            </AtomsStyles.FormContainer>
-        </AtomsStyles.BaseContainer>
-        
+        <Container fluid>
+            <Row className="mt-3 mb-4 justify-content-center">
+                <Col xs={10} md={8} lg={6}>                
+                    <AtomsStyles.RowFormTitle >
+                        <AtomsStyles.FormTitle className="fs-2 m-0">Inscrivez-Vous</AtomsStyles.FormTitle>
+                        <AtomsStyles.FormTitle className="m-0">C'est rapide et facile.</AtomsStyles.FormTitle>
+                    </AtomsStyles.RowFormTitle>
+                    <AtomsStyles.RowForm className="px-3">
+                        <Form onSubmit={(e) => HandleSubmit(e)} ref={formRef} className="d-flex flex-column">
+                            <Form.Group className="mb-3" controlId="formPseudo">
+                                <AtomsStyles.FormControlInput
+                                    className="fs-4 text-center"
+                                    type="text"
+                                    placeholder="Pseudo"
+                                    ref={inputPseudo}
+                                    required
+                                />
+                            </Form.Group>                    
+                            
+                            <Form.Group className="mb-3" controlId="formEmail">
+                                <AtomsStyles.FormControlInput
+                                    className="fs-4 text-center"
+                                    type="email"
+                                    placeholder="Adresse e-mail"
+                                    ref={inputEmail}
+                                    required
+                                />
+                            </Form.Group>     
+                            
+                            <Form.Group className="mb-3" controlId="formPassword">
+                                <AtomsStyles.FormControlInput
+                                    className="fs-4 text-center"
+                                    type="password"
+                                    placeholder="Mot de passe"
+                                    ref={inputPassword}
+                                    required
+                                />
+                            </Form.Group>                            
+                            <AtomsStyles.FormFooterLine className="my-3"/>
+                            <AtomsStyles.DarkButton variant="secondary" className="fs-4" type="submit">S'inscrire</AtomsStyles.DarkButton>
+                        </Form>
+                    </AtomsStyles.RowForm>
+                </Col>
+            </Row>            
+        </Container>        
     );
 };
 
