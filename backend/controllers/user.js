@@ -37,7 +37,8 @@ exports.signup = (req, res, next) => {
                              { userId: user._id },
                              'KSkCQocJLzlx1-UkEaOtjKcrH0oP5C1bWadvVAqOeNHr7yL7eTd6GX80DvQ1cFh7FVZQ',
                              { expiresIn: '24h' }
-                         )
+                         ),
+                         admin: user.admin, 
                      });
                  })
                  .catch(error => res.status(500).json({ error }));
