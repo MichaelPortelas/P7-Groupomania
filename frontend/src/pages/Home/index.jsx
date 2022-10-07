@@ -15,8 +15,6 @@ function Home(){
     const dispatch = useDispatch();
     const postsData = useSelector(selectPosts);
 
-    console.log(postsData);
-    
     // connection database
     const apiUrl = 'http://localhost:3000/api';
         
@@ -27,8 +25,6 @@ function Home(){
     useEffect(() => {
         authAxios.get(`/posts`)
             .then((res) => {
-                //const dataSorted = res.data.sort((a,b) => new Date(...a.date) - new Date(...b.date))
-                
                 dispatch(setPostsData(res.data))
             })            
             .catch((error) => {
@@ -44,7 +40,8 @@ function Home(){
                     {
                         postsData?.map((post) => 
                             <Post 
-                                key={post._id} 
+                                key={post._id}
+                                id={post._id}
                                 userId={post.userId}
                                 pseudo={post.pseudo}
                                 message={post.message}

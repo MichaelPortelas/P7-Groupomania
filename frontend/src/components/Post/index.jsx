@@ -7,9 +7,11 @@ import Image from 'react-bootstrap/Image'
 import { useSelector } from "react-redux"
 import { selectCache } from "../../utils/selectors"
 
-import { ColPostDate, ColPostPseudo, ButtonDelete, ButtonUpdate, ColPost, RowPostHeader, RowPostMessage, RowPostImage } from './styles';
+import { ColPostDate, ColPostPseudo, ButtonUpdate, ColPost, RowPostHeader, RowPostMessage, RowPostImage } from './styles';
 import { StyledLink } from '../../utils/style/Atoms'
 import { FaRegThumbsUp } from 'react-icons/fa'
+
+import DelPost from '../DelPost';
 
 function Post(props) {
     const postUserId = props.userId;
@@ -68,9 +70,7 @@ function Post(props) {
                                     <Col xs={12} sm={6} className="mb-2 mb-sm-0 d-flex justify-content-center justify-content-sm-end">
                                         <ButtonUpdate variant="secondary">Modifier</ButtonUpdate>
                                     </Col>
-                                    <Col xs={12} sm={6} className="d-flex justify-content-center justify-content-sm-start">
-                                        <ButtonDelete variant="danger">Supprimer</ButtonDelete>
-                                    </Col>
+                                    <DelPost id={props.id} />
                                 </Row>
                             </Col>
                         </Row>

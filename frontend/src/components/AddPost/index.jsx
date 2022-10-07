@@ -4,7 +4,7 @@ import * as AtomsStyles from "../../utils/style/Atoms";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from '../../features/posts.slice';
 
-import { selectCache } from "../../utils/selectors"
+import { selectCache } from "../../utils/selectors";
 
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
