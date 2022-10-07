@@ -26,20 +26,24 @@ exports.signup = (req, res, next) => {
                  return res.status(401).json({ error: 'Utilisateur non trouvé !' });
              }
              bcrypt.compare(req.body.password, user.password)
-                 .then(valid => {
-                     if (!valid) {
+                .then(valid => {
+                    if (!valid) {
                          return res.status(401).json({ error: 'Mot de passe incorrect !' });
                      }
-                     res.status(200).json({
-                         userId: user._id,
-                         pseudo: user.pseudo,
-                         token: jwt.sign(
-                             { userId: user._id },
-                             'KSkCQocJLzlx1-UkEaOtjKcrH0oP5C1bWadvVAqOeNHr7yL7eTd6GX80DvQ1cFh7FVZQ',
-                             { expiresIn: '24h' }
-                         ),
-                         admin: user.admin, 
-                     });
+                    res.status(200).json({
+                        userId: user._id,
+                        pseudo: user.pseudo,
+                        admin: user.admin,
+                        token: jwt.sign(
+                        { 
+                            userId: user._id,
+                            pseudo: user.pseudo,
+                            admin: user.admin,                                 
+                        },
+                            'KSkCQocJLzlx1-UkEaOtjKcrH0oP5C1bWadvVAqOeNHr7yL7eTd6GX80DvQ1cFh7FVZQ',
+                            { expiresIn: '24h' }
+                        ),
+                    });
                  })
                  .catch(error => res.status(500).json({ error }));
          })
