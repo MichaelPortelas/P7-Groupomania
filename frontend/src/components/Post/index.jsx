@@ -7,11 +7,12 @@ import Image from 'react-bootstrap/Image'
 import { useSelector } from "react-redux"
 import { selectCache } from "../../utils/selectors"
 
-import { ColPostDate, ColPostPseudo, ButtonUpdate, ColPost, RowPostHeader, RowPostMessage, RowPostImage } from './styles';
+import { ColPostDate, ColPostPseudo, ColPost, RowPostHeader, RowPostMessage, RowPostImage } from './styles';
 import { StyledLink } from '../../utils/style/Atoms'
 import { FaRegThumbsUp } from 'react-icons/fa'
 
 import DelPost from '../DelPost';
+import UpdPost from '../UpdPost';
 
 function Post(props) {
     const postUserId = props.userId;
@@ -53,11 +54,15 @@ function Post(props) {
                 </RowPostMessage>
                 
                 {/* POST IMAGE */}
-                <RowPostImage className="pb-3 border-bottom border-2">
-                    <Col className="d-flex justify-content-center">
-                        <Image rounded fluid src={props.imageUrl} alt="placeHolder text"/>
-                    </Col>
-                </RowPostImage>
+                {props.imageUrl? (
+                    <RowPostImage className="pb-3 border-bottom border-2">
+                        <Col className="d-flex justify-content-center">
+                            <Image rounded fluid src={props.imageUrl} alt="placeHolder text"/>
+                        </Col>
+                    </RowPostImage>
+                ):(
+                    <></>
+                )}
                 
                 {/* POST FOOTER */}                
                     {moderate ? (
@@ -67,9 +72,7 @@ function Post(props) {
                             </Col>
                             <Col xs={12} lg={6}>
                                 <Row>
-                                    <Col xs={12} sm={6} className="mb-2 mb-sm-0 d-flex justify-content-center justify-content-sm-end">
-                                        <ButtonUpdate variant="secondary">Modifier</ButtonUpdate>
-                                    </Col>
+                                    <UpdPost post={props} />
                                     <DelPost id={props.id} />
                                 </Row>
                             </Col>
@@ -77,7 +80,7 @@ function Post(props) {
                     ):(
                         <Row className="mt-2 justify-content-center bg-white">
                             <Col xs={12} lg={6} className='mb-2 mb-lg-0 d-flex justify-content-center align-items-center'>
-                                <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> {props.likes}</StyledLink>
+                                <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> J'aime - {props.likes}</StyledLink>
                             </Col>
                         </Row>   
                     )}                

@@ -38,7 +38,7 @@ const DelPost = ({ id }) => {
                 return <span>Oupssss!! il y a un problème</span>
             });
         
-            window.location.reload();
+        window.location.reload();
     }
 
     return (

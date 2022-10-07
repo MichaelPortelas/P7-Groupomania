@@ -16,9 +16,17 @@ export const postsSlice = createSlice({
     editPost: (state, { payload }) => {
       state.posts = state.posts.map((post) => {
         if (post.id === payload[1]) {
+          if (payload[0].imageUrl) {
+            return {
+              ...post,
+              imageUrl: payload[0].imageUrl,
+              message: payload[0].message,
+            }
+          }
+
           return {
             ...post,
-            // changement a determiner
+            message: payload[0].message,
           }
         } else {
           return post
