@@ -1,3 +1,5 @@
+import Moment from 'moment';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image'
@@ -10,13 +12,23 @@ import { StyledLink } from '../../utils/style/Atoms'
 import { FaRegThumbsUp } from 'react-icons/fa'
 
 function Post(props) {
-    const id = props.id;
-    
-    const cache = useSelector(selectCache)
-    let admin = false;
+    const postUserId = props.userId;
+    const cache = useSelector(selectCache);
+
+    Moment.locale('fr');
+    const formatDate = Moment(props.date).format('Do MMMM YYYY, HH:mm');
+
+    // on regarde si l'user est admin ou créateur du post
+    // si oui on lui donne les droits de moderation
+    let moderate = false;    
 
     if(cache){
-        admin = cache.admin;
+        const isAdmin = cache.admin;
+        const userId = cache.userId;
+
+        if(isAdmin || postUserId === userId){
+            moderate = true;
+        }
     }
 
     return (
@@ -25,18 +37,15 @@ function Post(props) {
                 
                 {/* POST HEADER */}
                 <RowPostHeader className="rounded-top py-2 justify-content-between">
-                    <ColPostPseudo xs={12} lg={6} className="d-flex align-items-center fs-2 justify-content-center justify-content-lg-start">Pseudo</ColPostPseudo>
-                    <ColPostDate xs={12} lg={6} className="d-flex align-items-center fs-5 justify-content-center justify-content-lg-end">9 septembre 2022, 00:59</ColPostDate>
+                    <ColPostPseudo xs={12} lg={6} className="d-flex align-items-center fs-2 justify-content-center justify-content-lg-start">{props.pseudo}</ColPostPseudo>
+                    <ColPostDate xs={12} lg={6} className="d-flex align-items-center fs-5 justify-content-center justify-content-lg-end">{formatDate}</ColPostDate>
                 </RowPostHeader>
                 
                 {/* POST MESSAGE */}
                 <RowPostMessage className="p-3 justify-content-center">
                     <Col className="py-1 bg-white border border-2 rounded-3">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Aliquam ornare, erat vel aliquet tincidunt, nisl enim gravida lorem, 
-                            consequat vulputate justo metus et odio. Nulla placerat, 
-                            lorem nec convallis dapibus, tellus nunc vehicula augue, at malesuada sem
+                            {props.message}
                         </p>
                     </Col>
                 </RowPostMessage>
@@ -44,15 +53,15 @@ function Post(props) {
                 {/* POST IMAGE */}
                 <RowPostImage className="pb-3 border-bottom border-2">
                     <Col className="d-flex justify-content-center">
-                        <Image rounded fluid src={`https://picsum.photos/680/480?random=${id}`} alt="placeHolder text"/>
+                        <Image rounded fluid src={props.imageUrl} alt="placeHolder text"/>
                     </Col>
                 </RowPostImage>
                 
                 {/* POST FOOTER */}                
-                    {admin ? (
+                    {moderate ? (
                         <Row className="mt-2 justify-content-between bg-white">
                             <Col xs={12} lg={6} className='mb-2 mb-lg-0 d-flex justify-content-center align-items-center'>
-                                <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> J'aime - 0</StyledLink>
+                                <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> J'aime - {props.likes}</StyledLink>
                             </Col>
                             <Col xs={12} lg={6}>
                                 <Row>
@@ -68,7 +77,7 @@ function Post(props) {
                     ):(
                         <Row className="mt-2 justify-content-center bg-white">
                             <Col xs={12} lg={6} className='mb-2 mb-lg-0 d-flex justify-content-center align-items-center'>
-                                <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> J'aime - 0</StyledLink>
+                                <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> {props.likes}</StyledLink>
                             </Col>
                         </Row>   
                     )}                

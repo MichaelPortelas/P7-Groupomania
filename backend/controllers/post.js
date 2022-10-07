@@ -1,5 +1,5 @@
 const Post = require('../models/Post');
-const User = require('../models/User');
+
 const fs = require('fs');
 
 exports.getAllPost = (req, res, next) => {
@@ -15,14 +15,10 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.createPost = (req, res, next) => {
-    const postObject = JSON.parse(req.body.post);
-
-    delete postObject._id;
-    delete postObject._userId;
-
     const post = new Post({
-        ...postObject,
         userId: req.auth.userId,
+        pseudo: req.auth.pseudo,
+        message: req.body.post,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
         likes: 0,
         date: Date.now(),
@@ -30,7 +26,10 @@ exports.createPost = (req, res, next) => {
     });
 
     post.save()
-        .then(() => res.status(201).json({ message: 'Post engeristré !' }))
+        .then(() => res.status(201).json({ 
+            message: 'Post engeristré !',
+            post: post,
+        }))
         .catch(error => res.status(400).json({ error }));
 
 };
@@ -44,22 +43,9 @@ exports.modifyPost = (req, res, next) => {
 
     delete postObject._userId;
 
-    let admin = false;
-
-    User.findOne({_id: req.auth.userId})
-        .then((user) => {
-            if (!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-            }
-
-            admin = user.admin;
-        
-        })
-        .catch(error => res.status(401).json({ error }));
-    
     Post.findOne({_id: req.params.id})
         .then((post) => {
-            if(!admin && post.userId != req.auth.userId){
+            if(!req.auth.admin && post.userId != req.auth.userId){
                 res.status(401).json({ message : 'Not authorized'});
             }else {
                 Post.updateOne({_id: req.params.id}, {...postObject, _id: req.params.id})
@@ -72,22 +58,9 @@ exports.modifyPost = (req, res, next) => {
 
 exports.deletePost = (req, res, next) => {
 
-    let admin = false;
-
-    User.findOne({_id: req.auth.userId})
-        .then((user) => {
-            if (!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-            }
-
-            admin = user.admin;
-        
-        })
-        .catch(error => res.status(401).json({ error }));
-
     Post.findOne({ _id: req.params.id })
         .then(post => {
-            if(!admin && post.userId != req.auth.userId){
+            if(!req.auth.admin && post.userId != req.auth.userId){
                 res.status(401).json({ message: 'Not authorized' });
             }else {
                 const filename = post.imageUrl.split('/images/')[1];

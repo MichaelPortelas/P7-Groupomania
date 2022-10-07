@@ -6,41 +6,26 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState()
 
-//   const handleSubmit = async e => {
-//     e.preventDefault();
-//     const user = { username, password };
-//     // send the username and password to the server
-//     const response = await axios.post(
-//       "http://blogservice.herokuapp.com/api/login",
-//       user
-//     );
-//     // set the state of the user
-//     setUser(response.data)
-//     // store the user in localStorage
-//     localStorage.setItem('user', response.data)
-//     console.log(response.data)
-//   };
+  const handleSubmit = async e => {
+      e.preventDefault();
 
-const handleSubmit = async e => {
-    e.preventDefault();
+      const response = await fetch('http://localhost:3000/api/auth/login', {
+          methode: 'POST',
+          body: {
+              email: {mail},
+              password : {password},
+          }
+      })
+      const data = await response.json()
 
-    const response = await fetch('http://localhost:3000/api/auth/login', {
-        methode: 'POST',
-        body: {
-            email: {mail},
-            password : {password},
-        }
-    })
-    const data = await response.json()
+      setUser(data)
 
-    setUser(data)
+      localStorage.setItem('user', data)
 
-    localStorage.setItem('user', data)
+      console.log(data)
 
-    console.log(data)
-
-    
-}
+      
+  }
 
 // if there's a user show the message below
   if (user) {

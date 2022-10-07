@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const rotate = keyframes`
   from {
@@ -43,6 +44,11 @@ export const DarkButton = styled(Button) `
     color: ${colors.secondary};
     border-radius: 20px;
     text-shadow: 0px 4px 4px ${colors.black};
+
+    &:hover{
+      box-shadow: 0px 4px 4px rgba(78, 81, 102, 0.5);
+      transition: .3ms;
+    }
 `
 
 export const FormFooterLine = styled.div `
@@ -79,4 +85,16 @@ export const FormControlInput = styled(Form.Control)`
     &::placeholder{
         color: #D9D9D9;
     }
+`
+export const ModalHeader = styled(Modal.Header) `
+  background-color: ${colors.tertary};
+`
+export const ModalTitle = styled(Modal.Title) `
+  color: ${colors.secondary};
+`
+export const ModalBody = styled(Modal.Body) `
+  background-color: ${colors.secondary};
+`
+export const ModalFooter = styled(Modal.Footer) `
+  background-color: ${colors.secondary};
 `
