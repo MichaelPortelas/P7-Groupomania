@@ -15,11 +15,16 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.createPost = (req, res, next) => {
+    
+    const postObject = req.file ? {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } : { ...req.body };
+
     const post = new Post({
+        ...postObject,
         userId: req.auth.userId,
         pseudo: req.auth.pseudo,
-        message: req.body.post,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
         likes: 0,
         date: Date.now(),
         usersLiked: [],
@@ -37,20 +42,35 @@ exports.createPost = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {
     
     const postObject = req.file ? {
-        ...JSON.parse(req.body.post),
+        ...req.body,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
 
-    delete postObject._userId;
-
     Post.findOne({_id: req.params.id})
         .then((post) => {
+            console.log(post);
             if(!req.auth.admin && post.userId != req.auth.userId){
                 res.status(401).json({ message : 'Not authorized'});
             }else {
+                if(req.file && post.imageUrl){
+                    const filename = post.imageUrl.split('/images/')[1];
+                    fs.unlink(`public/images/${filename}`, (err => {
+                        if (err) console.log(err);
+                        else {
+                          console.log(`\n Deleted file: ${filename}`);
+                        }
+                    }))
+                }
+                
                 Post.updateOne({_id: req.params.id}, {...postObject, _id: req.params.id})
-                    .then(() => res.status(200).json({ message: 'Post modifié !' }))
-                    .catch(error => res.status(401).json({ error }));
+                    .then(() => res.status(200).json({ 
+                        message: 'Post modifié !',
+                        post: postObject,                            
+                    }))
+                    .catch((error) => {
+                        console.log(error);
+                        res.status(401).json({ error })
+                    });
             }
         })
         .catch(error => res.status(401).json({ error }));
