@@ -11,6 +11,7 @@ const indexRouter = require('./routes/index')
 
 const path = require('path');
 
+// on créer la connection à la base de données
 mongoose.connect('mongodb+srv://groupamania:RdCH9HwNnlHdw38P@groupamania.jaod74n.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
