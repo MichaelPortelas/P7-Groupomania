@@ -9,7 +9,8 @@ export const ColPost = styled(Col) `
 `
 
 export const ColPostPseudo = styled(Col) `
-    color: ${colors.primary};
+    color: ${colors.secondary};
+    text-shadow: 0px 4px 4px ${colors.primary};
 `
 
 export const ColPostDate = styled(Col) `
