@@ -47,7 +47,8 @@ function Home(){
                                 message={post.message}
                                 imageUrl={post.imageUrl}
                                 date={post.date}
-                                likes={post.likes} 
+                                likes={post.likes}
+                                usersLiked={post.usersLiked} 
                             />
                         )
                     }                                   

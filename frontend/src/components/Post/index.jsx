@@ -15,6 +15,7 @@ import UpdPost from '../UpdPost';
 import UserLike from '../UserLike';
 
 function Post(props) {
+        
     const postUserId = props.userId;
     const cache = useSelector(selectCache);
 
@@ -73,9 +74,11 @@ function Post(props) {
                             "mt-2 justify-content-center bg-white"  
                         )}
                 >
-                    <UserLike 
+                    <UserLike
+                        id={props.id} 
                         likes={props.likes} 
-                        postUserId={props.userId}    
+                        postUserId={props.userId}
+                        usersLiked={props.usersLiked}    
                     />
                     {moderate ? (
                         <Col xs={12} lg={6}>
