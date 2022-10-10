@@ -31,7 +31,7 @@ function Home(){
                 console.log(error)
                 return <span>Oupssss!! il y a un problème</span>
             })
-    }, []);
+    }, [dispatch, authAxios]);
 
     return (
         <main className='mt-3'>
