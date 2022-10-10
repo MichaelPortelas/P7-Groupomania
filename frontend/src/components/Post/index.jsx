@@ -17,19 +17,25 @@ import UserLike from '../UserLike';
 function Post(props) {
         
     const postUserId = props.userId;
+
+    // on recupère le cache dans le state redux
     const cache = useSelector(selectCache);
 
+    // on mets la date au format voulu : '16 octobre 2022, 22:30'
     Moment.locale('fr');
     const formatDate = Moment(props.date).format('Do MMMM YYYY, HH:mm');
 
-    // on regarde si l'user est admin ou créateur du post
-    // si oui on lui donne les droits de moderation
+    
     let moderate = false;    
 
+    // on regarde si un cache existe
     if(cache){
         const isAdmin = cache.admin;
         const userId = cache.userId;
 
+        // si oui on regarde si l'user est admin ou créateur du post 
+        // si c'est le cas on lui donne les droits de moderation
+        
         if(isAdmin || postUserId === userId){
             moderate = true;
         }
@@ -55,6 +61,7 @@ function Post(props) {
                 </RowPostMessage>
                 
                 {/* POST IMAGE */}
+                {/* si on as un lien d'image dans les props on l'affiche */}
                 {props.imageUrl? (
                     <RowPostImage className="pb-3 border-bottom border-2">
                         <Col className="d-flex justify-content-center">

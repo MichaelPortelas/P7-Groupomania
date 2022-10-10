@@ -13,6 +13,7 @@ import { ButtonDelete } from './styles';
 const DelPost = ({ id }) => {
     const dispatch = useDispatch();
 
+    // on recupère le cache dans le state redux
     const cache = useSelector(selectCache);
 
     const HandleDelete = (e) => {
@@ -26,10 +27,13 @@ const DelPost = ({ id }) => {
             baseURL: apiUrl,
         })
 
+        // on récupère le token dans le cache
         authAxios.defaults.headers.common['Authorization'] = `Bearer ${cache.token}`;
 
         authAxios.delete(`/posts/` + id)
             .then( () =>
+
+                // on suprime le post du store redux
                 dispatch(deletePost(id))
                 
             )

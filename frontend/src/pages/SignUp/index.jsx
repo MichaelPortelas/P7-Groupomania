@@ -17,6 +17,7 @@ const SignUp = () => {
     const inputPassword = useRef();
     const dispatch = useDispatch();
     
+    // on recupère le cache dans le state redux
     const cache = useSelector(selectCache);
     
     const HandleSubmit = (e) => {
@@ -39,8 +40,9 @@ const SignUp = () => {
             axios.post('http://localhost:3000/api/auth/login', data)
             .then((res) => {
                 
+                // on créer la session dans le state redux
                 dispatch(setCache(res.data));
-
+                // on créer la session dans le localstorage
                 localStorage.setItem('user', JSON.stringify(res.data));
 
                 //on renvoie l'utilisateur vers la page d'accueil

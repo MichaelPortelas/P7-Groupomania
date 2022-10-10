@@ -13,6 +13,8 @@ import Cta from '../../components/Cta';
 function Home(){   
     
     const dispatch = useDispatch();
+    
+    // on recupère les posts dans le state redux
     const postsData = useSelector(selectPosts);
 
     // connection database

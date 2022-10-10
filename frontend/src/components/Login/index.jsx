@@ -33,8 +33,9 @@ const Login = () => {
         axios.post('http://localhost:3000/api/auth/login', data)
         .then((res) => {
 
+            // on créer la session dans le state redux
             dispatch(setCache(res.data))
-
+            // on créer la session dans le localstorage
             localStorage.setItem('user', JSON.stringify(res.data))
 
             formRef.current.reset()

@@ -7,15 +7,21 @@ export const postsSlice = createSlice({
   },
   reducers: {
     setPostsData: (state, { payload }) => {
+      // on affiche les post dans l'ordre anthéchronologique
       state.posts = payload.reverse()
     },
     addPost: (state, { payload }) => {
+      // on remet les post dans l'ordre chonologique et on ajoute le nouveau post
       state.posts.reverse().push(payload)
+      // on affiche les post dans l'ordre anthéchronologique
       state.posts = state.posts.reverse()
     },
     editPost: (state, { payload }) => {
+      // on regarde la liste des post
       state.posts = state.posts.map((post) => {
+        // si le post correspond au post envoyé
         if (post.id === payload[1]) {
+          // on regarde si on as une url d'image dans l'envois
           if (payload[0].imageUrl) {
             return {
               ...post,
@@ -34,6 +40,7 @@ export const postsSlice = createSlice({
       })
     },
     deletePost: (state, { payload }) => {
+      // on mets a jour le state en filtrant tous les post qui ne corresponde pas a l'id envoyé
       state.posts = state.posts.filter((post) => post.id !== payload)
     },
     postLike: (state, { payload }) => {

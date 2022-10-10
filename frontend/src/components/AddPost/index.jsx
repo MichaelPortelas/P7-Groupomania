@@ -18,6 +18,7 @@ const AddPost = (props) => {
     const inputImage = useRef();
     const dispatch = useDispatch();
 
+    // on recupère le cache dans le state redux
     const cache = useSelector(selectCache);
 
     const [show, setShow] = useState(false);
@@ -33,6 +34,7 @@ const AddPost = (props) => {
         const formData = new FormData();
         formData.append('message', inputPost.current?.value);        
         
+        // si l'user envoie un fichier on créé le data image 
         if(inputImage.current?.files[0]) {
             formData.append('image', inputImage.current?.files[0]);
         }         
@@ -44,12 +46,14 @@ const AddPost = (props) => {
             baseURL: apiUrl,
         })
 
+        // on recupère le token dans le cache
         authAxios.defaults.headers.common['Authorization'] = `Bearer ${cache.token}`;
 
         authAxios.post(`/posts`, formData)
         .then((res) => {
             console.log(res.data.message);
             
+            // on ajoute le post dans le store redux
             dispatch(addPost(res.data.post));
             
             formRef.current.reset();

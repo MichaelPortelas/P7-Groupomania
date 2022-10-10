@@ -18,21 +18,28 @@ import Login from '../Login';
 function Header() {
 
     const dispatch = useDispatch();
+    
+    // on recupère le cache dans le state redux
     const cache = useSelector(selectCache);
 
     const handleLogout = () => {
-        localStorage.clear();
-        dispatch(deleteCache());
 
-        
+        // on suprimme le localstorage 
+        localStorage.clear();
+
+        // on efface le cache du state redux
+        dispatch(deleteCache());        
     };
 
     useEffect(() => {
+
+        // on récupère la session dans le localstorage
         const loggedInUser = localStorage.getItem("user");
         
         if (loggedInUser) {
-          const foundUser = JSON.parse(loggedInUser);
-          dispatch(setCache(foundUser))
+            // si la session existe on l'enregistre dans le state redux
+            const foundUser = JSON.parse(loggedInUser);
+            dispatch(setCache(foundUser))
         }
     }, [dispatch]);
 
@@ -62,8 +69,6 @@ function Header() {
                                     )}
                                 </Col>
                             </Row>
-                            
-                            
                         </Nav>
                     </Navbar.Collapse>
                 </HeaderContainer>

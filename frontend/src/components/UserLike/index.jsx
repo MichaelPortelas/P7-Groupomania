@@ -14,25 +14,32 @@ const UserLike = (props) => {
     
     const likes = props.likes;
     const postUserId = props.postUserId;
+
+    // on recupère le cache dans le state redux
     const cache = useSelector(selectCache);
+
     const dispatch = useDispatch();
 
     let liked = false;
     let disliked = false;
     let data = {};
 
+    // on regarde si un cache existe
     if(cache){
         const userId = cache.userId;
         liked = true;
 
+        // on regarde si l'user est le créateur du post (on ne peux pas liker sont propre post)
         if(postUserId === userId){
             liked = false
         }
-    
+        
+        // on regarde si l'user à déjà liké le post
         if(props.usersLiked?.find((element) => element === cache.userId)){
             data = {
                 like: 0,
             };
+            // si l'user a déjà liké on active le dislike
             disliked = true;
         } else {
             data = {
@@ -40,7 +47,6 @@ const UserLike = (props) => {
             };
         }
     }
-
     
     const HandleLike = (e) => {
         e.preventDefault();
@@ -53,6 +59,7 @@ const UserLike = (props) => {
             baseURL: apiUrl,
         })
 
+        // on recupère le token dans le cache
         authAxios.defaults.headers.common['Authorization'] = `Bearer ${cache.token}`;
 
         authAxios.post("/posts/" + props.id + "/like/", data)
@@ -68,6 +75,8 @@ const UserLike = (props) => {
             })
     }
 
+    // on créé un mini composant pour le likeOrdislike.
+    // si le dislike est activé l'user ne peux plus liker et peu dislike le post
     const LikeOrDislike = () => {
         return (
             <>
@@ -82,6 +91,7 @@ const UserLike = (props) => {
 
     return (      
         <Col xs={12} lg={6} className='mb-2 mb-lg-0 d-flex justify-content-center align-items-center'>
+            {/* si l'user a le droit de liker le post on renvois au composant likeOrDislike  */}
             {liked?(
                 <StyledLink href="#" className='fs-4' onClick={ (e) => HandleLike(e) }><LikeOrDislike /></StyledLink>              
             ):(                   

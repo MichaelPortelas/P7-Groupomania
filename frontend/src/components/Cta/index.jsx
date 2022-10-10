@@ -9,6 +9,8 @@ import { StyledLink } from '../../utils/style/Atoms'
 import Row from 'react-bootstrap/Row';
 
 function Cta() {
+
+    // on recupère le cache dans le state redux
     const cache = useSelector(selectCache)
     
     return (
