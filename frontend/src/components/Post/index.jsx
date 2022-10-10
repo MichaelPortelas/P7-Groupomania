@@ -8,11 +8,11 @@ import { useSelector } from "react-redux"
 import { selectCache } from "../../utils/selectors"
 
 import { ColPostDate, ColPostPseudo, ColPost, RowPostHeader, RowPostMessage, RowPostImage } from './styles';
-import { StyledLink } from '../../utils/style/Atoms'
-import { FaRegThumbsUp } from 'react-icons/fa'
+
 
 import DelPost from '../DelPost';
 import UpdPost from '../UpdPost';
+import UserLike from '../UserLike';
 
 function Post(props) {
     const postUserId = props.userId;
@@ -65,25 +65,29 @@ function Post(props) {
                 )}
                 
                 {/* POST FOOTER */}                
+                <Row 
+                    className=
+                        {cache && moderate ?(
+                            "mt-2 justify-content-between bg-white"
+                        ):(
+                            "mt-2 justify-content-center bg-white"  
+                        )}
+                >
+                    <UserLike 
+                        likes={props.likes} 
+                        postUserId={props.userId}    
+                    />
                     {moderate ? (
-                        <Row className="mt-2 justify-content-between bg-white">
-                            <Col xs={12} lg={6} className='mb-2 mb-lg-0 d-flex justify-content-center align-items-center'>
-                                <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> J'aime - {props.likes}</StyledLink>
-                            </Col>
-                            <Col xs={12} lg={6}>
-                                <Row>
-                                    <UpdPost post={props} />
-                                    <DelPost id={props.id} />
-                                </Row>
-                            </Col>
-                        </Row>
+                        <Col xs={12} lg={6}>
+                            <Row>
+                                <UpdPost post={props} />
+                                <DelPost id={props.id} />
+                            </Row>
+                        </Col>
                     ):(
-                        <Row className="mt-2 justify-content-center bg-white">
-                            <Col xs={12} lg={6} className='mb-2 mb-lg-0 d-flex justify-content-center align-items-center'>
-                                <StyledLink href="#" className='fs-4'><FaRegThumbsUp/> J'aime - {props.likes}</StyledLink>
-                            </Col>
-                        </Row>   
+                        <></>   
                     )}                
+                </Row>
             </ColPost>
         </Row>
     )
