@@ -19,6 +19,7 @@ const UserLike = (props) => {
 
     let liked = false;
     let disliked = false;
+    let data = {};
 
     if(cache){
         const userId = cache.userId;
@@ -27,20 +28,19 @@ const UserLike = (props) => {
         if(postUserId === userId){
             liked = false
         }
+    
+        if(props.usersLiked?.find((element) => element === cache.userId)){
+            data = {
+                like: 0,
+            };
+            disliked = true;
+        } else {
+            data = {
+                like: 1,
+            };
+        }
     }
 
-    let data;
-
-    if(props.usersLiked?.find((element) => element === cache.userId)){
-        data = {
-            like: 0,
-        };
-        disliked = true;
-    } else {
-        data = {
-            like: 1,
-        };
-    }
     
     const HandleLike = (e) => {
         e.preventDefault();
@@ -85,7 +85,7 @@ const UserLike = (props) => {
             {liked?(
                 <StyledLink href="#" className='fs-4' onClick={ (e) => HandleLike(e) }><LikeOrDislike /></StyledLink>              
             ):(                   
-                <div className='fs-4'><FaRegThumbsUp/> {likes}</div>
+                <div className='fs-4'><FaRegThumbsUp/> {likes} Like(s)</div>
             )}
             
         </Col>  
