@@ -123,7 +123,7 @@ exports.checklikePost = (req, res, next) => {
                         // on regarde si l'user fait partie des likes
                         for(let i=0; i < listUsersLiked.length; i++){
                             if(listUsersLiked[i] == req.auth.userId){
-                                res.status(401).json({ message: 'Vous avez déjà liké cette sauce ! '});
+                                res.status(401).json({ message: 'Vous avez déjà liké ce post ! '});
                             }
                         };
                         
