@@ -9,8 +9,9 @@ Pour cela :
 ## Lancer l'API en local
 1. Allez dans le dossier `backend`
 2. Initialiser avec `yarn install`
-3. Faites tourner l'API avec `yarn devstart`
-4. Vérifier le lancement de l'API sur [http://localhost:3000](http://localhost:3000)
+3. Creer un fichier .env avec comme variable PORT={n° du port} et MOONGOSEDB={lien de connection à votre DB}
+4. Faites tourner l'API avec `yarn devstart`
+5. Vérifier le lancement de l'API sur [http://localhost:3000](http://localhost:3000)
 
 ## Lancer le SITEWEB en local
 1. Allez dans le dossier `frontend`
