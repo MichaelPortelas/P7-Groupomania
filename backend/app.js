@@ -11,8 +11,10 @@ const indexRouter = require('./routes/index')
 
 const path = require('path');
 
+require('dotenv').config()
+
 // on créer la connection à la base de données
-mongoose.connect('mongodb+srv://groupamania:RdCH9HwNnlHdw38P@groupamania.jaod74n.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env.MOONGOSEDB,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
