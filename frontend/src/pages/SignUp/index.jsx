@@ -30,14 +30,14 @@ const SignUp = () => {
             password:  inputPassword.current.value,
         }
 
-        axios.post(process.env.APIURL + '/api/auth/signup', data)
+        axios.post(process.env.REACT_APP_API_URL + '/auth/signup', data)
         .then((res) => {
             console.log(res.data.message);
 
             formRef.current.reset();
 
             // On Connecte le nouveau user et on mets en cache la session
-            axios.post(process.env.APIURL + '/api/auth/login', data)
+            axios.post(process.env.REACT_APP_API_URL + '/auth/login', data)
             .then((res) => {
                 
                 // on créer la session dans le state redux

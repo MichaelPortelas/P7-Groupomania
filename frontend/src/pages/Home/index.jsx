@@ -5,23 +5,18 @@ import { selectPosts } from "../../utils/selectors"
 import { useEffect } from 'react';
 
 import Container from 'react-bootstrap/Container';
-
 import Post from "../../components/Post";
 import Cta from '../../components/Cta';
 
-
 function Home(){   
-    
     const dispatch = useDispatch();
     
     // on recupère les posts dans le state redux
     const postsData = useSelector(selectPosts);
 
     // connection database
-    const apiUrl = process.env.APIURL + '/api';
-        
     const authAxios = axios.create({
-        baseURL: apiUrl,
+        baseURL: process.env.REACT_APP_API_URL,
     })
     
     useEffect(() => {

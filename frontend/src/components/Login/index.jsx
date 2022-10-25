@@ -30,7 +30,7 @@ const Login = () => {
             password:  inputPassword.current.value,
         }
 
-        axios.post(process.env.APIURL + '/api/auth/login', data)
+        axios.post(process.env.REACT_APP_API_URL + '/auth/login', data)
         .then((res) => {
 
             // on créer la session dans le state redux

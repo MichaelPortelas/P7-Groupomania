@@ -42,10 +42,8 @@ const UpdPost = ({ post }) => {
         }
 
         // connection database
-        const apiUrl = process.env.APIURL + '/api';
-        
         const authAxios = axios.create({
-            baseURL: apiUrl,
+            baseURL: process.env.REACT_APP_API_URL,
         })
 
         // on recupère le token dans le cache

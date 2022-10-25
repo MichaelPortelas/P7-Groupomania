@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(    

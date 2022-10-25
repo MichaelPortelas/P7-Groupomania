@@ -21,10 +21,8 @@ const DelPost = ({ id }) => {
         e.preventDefault();
 
         // connection database
-        const apiUrl = process.env.APIURL + '/api';
-        
         const authAxios = axios.create({
-            baseURL: apiUrl,
+            baseURL: process.env.REACT_APP_API_URL,
         })
 
         // on récupère le token dans le cache
