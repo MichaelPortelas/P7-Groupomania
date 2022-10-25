@@ -40,7 +40,7 @@ const AddPost = (props) => {
         }         
         
         // connection database
-        const apiUrl = 'http://localhost:3000/api';
+        const apiUrl = process.env.APIURL + "/api";
         
         const authAxios = axios.create({
             baseURL: apiUrl,
