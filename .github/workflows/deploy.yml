@@ -1,0 +1,61 @@
+name: 🚀 Deploy Groupomania (frontend & backend logic with yarn)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔐 Setup SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: 🚀 Deploy on server with yarn
+        run: |
+          ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd /var/www/live-demo/groupomania
+            git pull origin main
+
+            RESTART_BACKEND=false
+            BUILD_FRONTEND=false
+
+            # Vérifie les changements dans backend/
+            if git diff-tree --no-commit-id --name-only -r \$(git rev-parse HEAD) | grep '^backend/'; then
+              echo "📦 Modifications détectées dans backend/, on redémarre..."
+              RESTART_BACKEND=true
+            fi
+
+            # Vérifie les changements dans frontend/
+            if git diff-tree --no-commit-id --name-only -r \$(git rev-parse HEAD) | grep '^frontend/'; then
+              echo "🎨 Modifications détectées dans frontend/, on recompile le front..."
+              BUILD_FRONTEND=true
+            fi
+
+            if \$RESTART_BACKEND; then
+              screen -S groupomania-backend -X quit || true
+              cd backend
+              yarn install
+              screen -dmS groupomania-backend bash -c "yarn start"
+              cd ..
+            else
+              echo "✅ Aucun changement dans backend/, pas de redémarrage."
+            fi
+
+            if \$BUILD_FRONTEND; then
+              cd frontend
+              yarn install
+              yarn build
+              cd ..
+              echo "✅ Frontend recompile avec succès."
+            else
+              echo "✅ Aucun changement dans frontend/, pas de recompilation."
+            fi
+          EOF
