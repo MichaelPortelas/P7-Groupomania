@@ -56,6 +56,6 @@ jobs:
               cd ..
               echo "✅ Frontend recompile avec succès."
             else
-              echo "✅ Aucun changement dans frontend/, pas de recompilation."
+              echo "✅ Aucun changement détecté dans frontend/, pas de recompilation."
             fi
           EOF
