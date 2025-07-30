@@ -39,7 +39,7 @@ jobs:
               BUILD_FRONTEND=true
             fi
 
-            if \$RESTART_BACKEND; then
+            if $RESTART_BACKEND; then
               screen -S groupomania-backend -X quit || true
               cd backend
               yarn install
@@ -49,7 +49,7 @@ jobs:
               echo "✅ Aucun changement dans backend/, pas de redémarrage."
             fi
 
-            if \$BUILD_FRONTEND; then
+            if $BUILD_FRONTEND; then
               cd frontend
               yarn install
               yarn build
