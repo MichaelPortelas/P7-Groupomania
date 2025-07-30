@@ -46,7 +46,7 @@ jobs:
               screen -dmS groupomania-backend bash -c "yarn start"
               cd ..
             else
-              echo "✅ Aucun changement dans backend/, pas de redémarrage."
+              echo "✅ Aucun changement détecté dans backend/, pas de redémarrage."
             fi
 
             if $BUILD_FRONTEND; then
